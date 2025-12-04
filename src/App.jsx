@@ -8,6 +8,9 @@ import EducationalQualification from './components/EducationalQualification';
 import SkillsAndTechnical from './components/SkillsAndTechnical';
 import AdditionalInfo from './components/AdditionalInfo';
 import SuccessScreen from './components/SuccessScreen';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { db } from './firebase';
+
 
 const STEPS = [
   { id: 1, label: 'General', component: GeneralInfo },
@@ -255,15 +258,30 @@ function App() {
     }
   };
 
-  const handleSubmit = () => {
+
+  const handleSubmit = async () => {
     if (validateCurrentStep()) {
-      setIsSubmitted(true);
-      // Clear cached data after successful submission
-      localStorage.removeItem('rvs_registration_form_data');
-      localStorage.removeItem('rvs_registration_current_step');
-      console.log('Form submitted:', formData);
+      try {
+        // Save to Firebase
+        const docRef = await addDoc(collection(db, 'registrations'), {
+          ...formData,
+          timestamp: serverTimestamp()
+        });
+        
+        console.log('Document written with ID: ', docRef.id);
+        
+        setIsSubmitted(true);
+        // Clear cached data after successful submission
+        localStorage.removeItem('rvs_registration_form_data');
+        localStorage.removeItem('rvs_registration_current_step');
+        console.log('Form submitted:', formData);
+      } catch (error) {
+        console.error('Error adding document: ', error);
+        alert('Error submitting form. Data saved locally. Please try again or contact support.');
+      }
     }
   };
+
 
   const handleReset = () => {
     setCurrentStep(1);
