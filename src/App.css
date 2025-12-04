@@ -1,0 +1,579 @@
+/* App Container */
+.app {
+  min-height: 100vh;
+  padding: var(--spacing-xl) 0;
+}
+
+/* Header */
+.app-header {
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+  animation: fadeIn 0.6s ease;
+}
+
+.app-header h1 {
+  margin-bottom: var(--spacing-sm);
+  font-size: 2.5rem;
+}
+
+.app-header p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+/* Cache Notification Banner */
+.cache-notification {
+  max-width: 900px;
+  margin: 0 auto var(--spacing-xl);
+  animation: slideDown 0.4s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cache-notification-content {
+  background: linear-gradient(135deg, hsl(220, 90%, 96%), hsl(200, 90%, 96%));
+  border: 2px solid hsl(210, 90%, 85%);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  position: relative;
+}
+
+.cache-icon {
+  font-size: 2rem;
+  animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.cache-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cache-text strong {
+  color: hsl(220, 80%, 30%);
+  font-size: 1rem;
+}
+
+.cache-text span {
+  color: hsl(220, 60%, 45%);
+  font-size: 0.9rem;
+}
+
+.btn-clear-cache {
+  background: linear-gradient(135deg, hsl(220, 70%, 50%), hsl(200, 70%, 55%));
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  white-space: nowrap;
+}
+
+.btn-clear-cache:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-close-notification {
+  background: transparent;
+  border: none;
+  color: hsl(220, 60%, 45%);
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all var(--transition-fast);
+  font-weight: 300;
+}
+
+.btn-close-notification:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: hsl(220, 80%, 30%);
+}
+
+
+/* Form Container */
+.form-container {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeIn 0.8s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.form-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+}
+
+/* Progress Bar */
+.progress-container {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+  position: relative;
+}
+
+.progress-line {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--surface-lighter);
+  z-index: 0;
+}
+
+.progress-line-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  transition: width var(--transition-slow);
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.step-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surface-light);
+  border: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  transition: all var(--transition-normal);
+  margin-bottom: var(--spacing-xs);
+}
+
+.progress-step.active .step-circle {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-glow);
+  transform: scale(1.1);
+}
+
+.progress-step.completed .step-circle {
+  background: var(--success);
+  border-color: var(--success);
+}
+
+.step-label {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-align: center;
+  transition: color var(--transition-normal);
+}
+
+.progress-step.active .step-label {
+  color: var(--primary-light);
+  font-weight: 500;
+}
+
+/* Form Section */
+.form-section {
+  animation: slideIn 0.4s ease;
+}
+
+.section-title {
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.section-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+/* Form Grid */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-grid-full {
+  grid-column: 1 / -1;
+}
+
+/* Form Group */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.form-group label {
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.optional-badge {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  background: var(--surface-lighter);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 400;
+}
+
+/* Input Fields */
+input, select, textarea {
+  background: var(--surface-light);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all var(--transition-normal);
+  outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--border-focus);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+input.error, select.error, textarea.error {
+  border-color: var(--error);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Date Input Custom Styling */
+input[type="date"] {
+  position: relative;
+  color-scheme: dark;
+  cursor: pointer;
+}
+
+/* Calendar icon styling */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(0.7) sepia(1) saturate(3) hue-rotate(200deg);
+  opacity: 0.8;
+  transition: all var(--transition-normal);
+  width: 20px;
+  height: 20px;
+}
+
+input[type="date"]:hover::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  filter: invert(0.7) sepia(1) saturate(4) hue-rotate(200deg) brightness(1.2);
+}
+
+input[type="date"]:focus::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  filter: invert(0.7) sepia(1) saturate(5) hue-rotate(200deg) brightness(1.3);
+}
+
+/* Date input placeholder/value text */
+input[type="date"]::-webkit-datetime-edit {
+  color: var(--text-primary);
+  padding: 0;
+}
+
+input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+  color: var(--text-primary);
+}
+
+input[type="date"]::-webkit-datetime-edit-text {
+  color: var(--text-secondary);
+  padding: 0 0.3em;
+}
+
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-year-field {
+  color: var(--text-primary);
+  font-weight: 500;
+  padding: 0.2em;
+  border-radius: 4px;
+  transition: background var(--transition-fast);
+}
+
+input[type="date"]::-webkit-datetime-edit-month-field:hover,
+input[type="date"]::-webkit-datetime-edit-day-field:hover,
+input[type="date"]::-webkit-datetime-edit-year-field:hover {
+  background: var(--surface-lighter);
+}
+
+input[type="date"]::-webkit-datetime-edit-month-field:focus,
+input[type="date"]::-webkit-datetime-edit-day-field:focus,
+input[type="date"]::-webkit-datetime-edit-year-field:focus {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  outline: none;
+  color: white;
+}
+
+/* Empty date input placeholder */
+input[type="date"]:invalid::-webkit-datetime-edit {
+  color: var(--text-tertiary);
+}
+
+
+/* Subsection */
+.subsection {
+  background: var(--surface-light);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-lg);
+  border-left: 4px solid var(--primary-color);
+}
+
+.subsection-title {
+  font-size: 1.1rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--primary-light);
+}
+
+/* Buttons */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-xl);
+  border-top: 1px solid var(--border-color);
+}
+
+.btn {
+  padding: var(--spacing-sm) var(--spacing-xl);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md), var(--shadow-glow);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: var(--surface-light);
+  color: var(--text-primary);
+  border: 2px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-lighter);
+  border-color: var(--primary-color);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Success Screen */
+.success-screen {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  animation: fadeIn 0.6s ease;
+}
+
+.success-icon {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, var(--success), hsl(142, 70%, 40%));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--spacing-xl);
+  font-size: 3rem;
+  animation: pulse 2s ease infinite;
+}
+
+.success-screen h2 {
+  margin-bottom: var(--spacing-md);
+  color: var(--success);
+}
+
+.success-screen p {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+  font-size: 1.1rem;
+}
+
+.success-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Data Display */
+.data-display {
+  background: var(--surface-light);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.data-display h3 {
+  margin-bottom: var(--spacing-md);
+  color: var(--primary-light);
+}
+
+.data-item {
+  display: flex;
+  padding: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.data-item:last-child {
+  border-bottom: none;
+}
+
+.data-label {
+  font-weight: 500;
+  color: var(--text-secondary);
+  min-width: 200px;
+}
+
+.data-value {
+  color: var(--text-primary);
+  flex: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-header h1 {
+    font-size: 2rem;
+  }
+  
+  .form-container {
+    padding: var(--spacing-lg);
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .progress-steps {
+    flex-wrap: wrap;
+  }
+  
+  .step-label {
+    font-size: 0.65rem;
+  }
+  
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+  
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .data-item {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+  
+  .data-label {
+    min-width: auto;
+  }
+}
