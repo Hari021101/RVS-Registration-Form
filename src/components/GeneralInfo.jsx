@@ -5,16 +5,27 @@ import '../DatePicker.css';
 
 function GeneralInfo({ formData, updateFormData, errors }) {
   // Parse the date string to Date object for DatePicker
-  const selectedDate = formData.dob ? new Date(formData.dob) : null;
+  const getSelectedDate = () => {
+    if (!formData.dob) return null;
+    try {
+      const date = new Date(formData.dob);
+      // Check if date is valid
+      return isNaN(date.getTime()) ? null : date;
+    } catch {
+      return null;
+    }
+  };
 
   const handleDateChange = (date) => {
-    if (date) {
+    console.log('Date changed:', date);
+    if (date && !isNaN(date.getTime())) {
       // Format date as YYYY-MM-DD
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, '0');
       const day = String(date.getDate()).padStart(2, '0');
       const dateString = `${year}-${month}-${day}`;
       
+      console.log('Formatted date string:', dateString);
       updateFormData('dob', dateString);
       
       // Auto-calculate age
@@ -24,12 +35,15 @@ function GeneralInfo({ formData, updateFormData, errors }) {
       if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < date.getDate())) {
         age--;
       }
+      console.log('Calculated age:', age);
       updateFormData('age', age.toString());
     } else {
+      console.log('Clearing date fields');
       updateFormData('dob', '');
       updateFormData('age', '');
     }
   };
+
 
   return (
     <>
@@ -47,6 +61,7 @@ function GeneralInfo({ formData, updateFormData, errors }) {
             onChange={(e) => updateFormData('name', e.target.value)}
             placeholder="Enter full name"
             className={errors.name ? 'error' : ''}
+            autoComplete="name"
           />
           {errors.name && <span className="text-error">{errors.name}</span>}
         </div>
@@ -74,6 +89,7 @@ function GeneralInfo({ formData, updateFormData, errors }) {
             onChange={(e) => updateFormData('fatherName', e.target.value)}
             placeholder="Enter father's name"
             className={errors.fatherName ? 'error' : ''}
+            autoComplete="additional-name"
           />
           {errors.fatherName && <span className="text-error">{errors.fatherName}</span>}
         </div>
@@ -86,6 +102,7 @@ function GeneralInfo({ formData, updateFormData, errors }) {
             onChange={(e) => updateFormData('motherName', e.target.value)}
             placeholder="Enter mother's name"
             className={errors.motherName ? 'error' : ''}
+            autoComplete="family-name"
           />
           {errors.motherName && <span className="text-error">{errors.motherName}</span>}
         </div>
@@ -93,7 +110,7 @@ function GeneralInfo({ formData, updateFormData, errors }) {
         <div className="form-group">
           <label className="required">Date of Birth</label>
           <DatePicker
-            selected={selectedDate}
+            selected={getSelectedDate()}
             onChange={handleDateChange}
             dateFormat="dd/MM/yyyy"
             placeholderText="Select date of birth"
@@ -106,6 +123,7 @@ function GeneralInfo({ formData, updateFormData, errors }) {
             className={errors.dob ? 'error custom-datepicker' : 'custom-datepicker'}
             calendarClassName="custom-calendar"
             wrapperClassName="datepicker-wrapper"
+            popperPlacement="bottom-start"
           />
           {errors.dob && <span className="text-error">{errors.dob}</span>}
         </div>
@@ -118,6 +136,7 @@ function GeneralInfo({ formData, updateFormData, errors }) {
             onChange={(e) => updateFormData('age', e.target.value)}
             placeholder="Auto-calculated or enter manually"
             className={errors.age ? 'error' : ''}
+            autoComplete="off"
           />
           {errors.age && <span className="text-error">{errors.age}</span>}
         </div>

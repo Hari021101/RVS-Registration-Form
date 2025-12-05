@@ -6,7 +6,7 @@ Your RVS Registration Form is now **LIVE** on GitHub Pages! 🎉
 
 ### 🌐 Your Live Website URL
 
-**https://hari021101.github.io/RVS-Registration-Form/**
+**https://hari021101.github.io/RVS-Registration-Form/#/**
 
 🎯 **Your form is now accessible to anyone with this link!**
 
@@ -213,7 +213,7 @@ Generate a QR code pointing to your URL for easy mobile access
 Subject: RVS Team Registration Form
 
 Please complete your registration using this link:
-https://hari021101.github.io/RVS-Registration-Form/
+https://hari021101.github.io/RVS-Registration-Form/#/
 
 This is a multi-step form that will take approximately 10-15 minutes.
 Your data is automatically saved as you go, so you can take breaks.
@@ -325,7 +325,7 @@ Want a custom domain like `register.yourcompany.com`?
 ## 📞 Support & Resources
 
 **Your Live Site:**
-🌐 https://hari021101.github.io/RVS-Registration-Form/
+🌐 https://hari021101.github.io/RVS-Registration-Form/#/
 
 **GitHub Repository:**
 🔗 https://github.com/Hari021101/RVS-Registration-Form
@@ -350,6 +350,6 @@ Your RVS Registration Form is now:
 - ✅ **Ready for production use**
 
 **Share this URL with your team:**
-👉 **https://hari021101.github.io/RVS-Registration-Form/**
+👉 **https://hari021101.github.io/RVS-Registration-Form/#/**
 
 Happy registering! 🚀

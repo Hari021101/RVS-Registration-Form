@@ -15,6 +15,7 @@ function ContactDetails({ formData, updateFormData, errors }) {
             onChange={(e) => updateFormData('personalEmail', e.target.value)}
             placeholder="your.email@example.com"
             className={errors.personalEmail ? 'error' : ''}
+            autoComplete="email"
           />
           {errors.personalEmail && <span className="text-error">{errors.personalEmail}</span>}
         </div>
@@ -28,6 +29,7 @@ function ContactDetails({ formData, updateFormData, errors }) {
             placeholder="10-digit mobile number"
             maxLength="10"
             className={errors.phoneNumber ? 'error' : ''}
+            autoComplete="tel"
           />
           {errors.phoneNumber && <span className="text-error">{errors.phoneNumber}</span>}
         </div>
@@ -41,6 +43,7 @@ function ContactDetails({ formData, updateFormData, errors }) {
             placeholder="10-digit emergency contact"
             maxLength="10"
             className={errors.emergencyContact ? 'error' : ''}
+            autoComplete="tel-national"
           />
           {errors.emergencyContact && <span className="text-error">{errors.emergencyContact}</span>}
         </div>
@@ -55,6 +58,7 @@ function ContactDetails({ formData, updateFormData, errors }) {
             onChange={(e) => updateFormData('currentAddress', e.target.value)}
             placeholder="Enter your current address"
             rows="3"
+            autoComplete="street-address"
           />
         </div>
 
@@ -66,6 +70,7 @@ function ContactDetails({ formData, updateFormData, errors }) {
             placeholder="Enter your permanent address"
             rows="3"
             className={errors.permanentAddress ? 'error' : ''}
+            autoComplete="street-address"
           />
           {errors.permanentAddress && <span className="text-error">{errors.permanentAddress}</span>}
         </div>

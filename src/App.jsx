@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import GeneralInfo from './components/GeneralInfo';
 import ContactDetails from './components/ContactDetails';
@@ -105,7 +105,7 @@ function App() {
   const [showCacheNotification, setShowCacheNotification] = useState(false);
 
   // Load form data from localStorage on component mount
-  useState(() => {
+  useEffect(() => {
     const savedData = localStorage.getItem('rvs_registration_form_data');
     const savedStep = localStorage.getItem('rvs_registration_current_step');
     
@@ -129,12 +129,15 @@ function App() {
 
   // Save form data to localStorage whenever it changes
   const updateFormData = (field, value) => {
-    const newData = { ...formData, [field]: value };
-    setFormData(newData);
-    
-    // Save to localStorage
-    localStorage.setItem('rvs_registration_form_data', JSON.stringify(newData));
-    localStorage.setItem('rvs_registration_current_step', currentStep.toString());
+    console.log(`updateFormData called - field: ${field}, value:`, value);
+    setFormData(prevFormData => {
+      const newData = { ...prevFormData, [field]: value };
+      console.table('New formData:', newData);
+      // Save to localStorage
+      localStorage.setItem('rvs_registration_form_data', JSON.stringify(newData));
+      localStorage.setItem('rvs_registration_current_step', currentStep.toString());
+      return newData;
+    });
     
     // Clear error when user starts typing
     if (errors[field]) {
@@ -147,6 +150,28 @@ function App() {
     localStorage.removeItem('rvs_registration_form_data');
     localStorage.removeItem('rvs_registration_current_step');
     setShowCacheNotification(false);
+    
+    // Actually clear the form fields
+    setCurrentStep(1);
+    setFormData({
+      name: '', gender: '', fatherName: '', motherName: '', dob: '', age: '',
+      bloodGroup: '', maritalStatus: '', personalEmail: '', phoneNumber: '',
+      emergencyContact: '', currentAddress: '', permanentAddress: '',
+      aadharNumber: '', panNumber: '', passportNumber: '', drivingLicense: '',
+      bankName: '', accountHolderName: '', accountNumber: '', ifscCode: '',
+      branchName: '', tenth_qualification: '', tenth_schoolName: '', tenth_board: '',
+      tenth_yearOfPassing: '', tenth_percentage: '', twelfth_qualification: '',
+      twelfth_schoolName: '', twelfth_board: '', twelfth_yearOfPassing: '',
+      twelfth_percentage: '', ug_collegeName: '', ug_degree: '', ug_department: '',
+      ug_yearOfPassing: '', ug_percentage: '', pg_collegeName: '', pg_degree: '',
+      pg_department: '', pg_yearOfPassing: '', pg_percentage: '',
+      technologyExpertise: '', programmingLanguages: '', tools: '', softSkills: '',
+      softTechnicalSkills: '', projectExperience: '', certificates: '',
+      internshipCertificates: '', knownLanguages: '', hobbies: '', linkedinUrl: '',
+      githubUrl: '',
+    });
+    setErrors({});
+    
     alert('Cached form data cleared!');
   };
 
@@ -391,13 +416,15 @@ function App() {
           </div>
 
           {/* Current Form Section */}
-          <div className="form-section">
-            <CurrentStepComponent 
-              formData={formData}
-              updateFormData={updateFormData}
-              errors={errors}
-            />
-          </div>
+          <form autoComplete="on" onSubmit={(e) => e.preventDefault()}>
+            <div className="form-section">
+              <CurrentStepComponent 
+                formData={formData}
+                updateFormData={updateFormData}
+                errors={errors}
+              />
+            </div>
+          </form>
 
           {/* Navigation Buttons */}
           <div className="form-actions">
