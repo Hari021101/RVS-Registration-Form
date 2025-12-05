@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { collection, getDocs, deleteDoc, doc, orderBy, query } from 'firebase/firestore';
 import { db } from '../firebase';
 import * as XLSX from 'xlsx';
@@ -127,9 +128,9 @@ function AdminDashboard() {
             <button className="btn btn-export" onClick={exportToExcel}>
               📥 Export All to Excel
             </button>
-            <a href="/" className="btn btn-secondary">
+            <Link to="/" className="btn btn-secondary">
               📝 Registration Form
-            </a>
+            </Link>
           </div>
         </div>
 
